@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -11,6 +11,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { TransactionService } from '../transaction.service';
 
 enum TransactionType {
   Income = 'Income',
@@ -39,6 +40,8 @@ export enum Category {
   styleUrl: './add-transaction.component.scss',
 })
 export class AddTransactionComponent {
+  private transactionService = inject(TransactionService);
+
   categories = [Category.Entertainment, Category.Groceries, Category.Salary];
   form = new FormGroup({
     name: new FormControl('', Validators.required),
@@ -49,6 +52,21 @@ export class AddTransactionComponent {
   });
 
   onSubmit(): void {
-    console.log(this.form.value);
+    if (
+      this.form.value.name &&
+      this.form.value.amount &&
+      this.form.value.transactionType &&
+      this.form.value.category &&
+      this.form.value.transactionDate
+    ) {
+      const transaction = {
+        name: this.form.value.name,
+        amount: +this.form.value.amount,
+        type: this.form.value.transactionType,
+        category: this.form.value.category,
+        date: this.form.value.transactionDate,
+      };
+      this.transactionService.addTransaction(transaction);
+    }
   }
 }
