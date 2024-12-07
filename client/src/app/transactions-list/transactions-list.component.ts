@@ -20,7 +20,7 @@ import { BehaviorSubject } from 'rxjs';
   templateUrl: './transactions-list.component.html',
   styleUrl: './transactions-list.component.scss',
 })
-export class TransactionsListComponent implements OnInit, AfterViewInit {
+export class TransactionsListComponent implements OnInit {
   private transactionService = inject(TransactionService);
 
   transactionsDataSource!: MatTableDataSource<Transaction>;
@@ -30,10 +30,7 @@ export class TransactionsListComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.transactionService.getTransactions().subscribe((transactions) => {
       this.transactionsDataSource = new MatTableDataSource(transactions);
+      this.transactionsDataSource.sort = this.matSort()!;
     });
-  }
-
-  ngAfterViewInit(): void {
-    this.transactionsDataSource.sort = this.matSort()!;
   }
 }
