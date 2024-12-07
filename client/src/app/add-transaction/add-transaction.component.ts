@@ -12,6 +12,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { TransactionService } from '../transaction.service';
+import {
+  MatDialogActions,
+  MatDialogContent,
+  MatDialogRef,
+  MatDialogTitle,
+} from '@angular/material/dialog';
 
 enum TransactionType {
   Income = 'Income',
@@ -35,12 +41,16 @@ export enum Category {
     MatSelectModule,
     MatDatepickerModule,
     MatButton,
+    MatDialogTitle,
+    MatDialogContent,
+    MatDialogActions,
   ],
   templateUrl: './add-transaction.component.html',
   styleUrl: './add-transaction.component.scss',
 })
 export class AddTransactionComponent {
   private transactionService = inject(TransactionService);
+  private dialogRef = inject(MatDialogRef<AddTransactionComponent>);
 
   categories = [Category.Entertainment, Category.Groceries, Category.Salary];
   form = new FormGroup({
@@ -50,6 +60,10 @@ export class AddTransactionComponent {
     category: new FormControl('', Validators.required),
     transactionDate: new FormControl(new Date()),
   });
+
+  onCancel(): void {
+    this.dialogRef.close();
+  }
 
   onSubmit(): void {
     if (
@@ -67,6 +81,8 @@ export class AddTransactionComponent {
         date: this.form.value.transactionDate,
       };
       this.transactionService.addTransaction(transaction);
+      this.form.reset();
+      this.dialogRef.close();
     }
   }
 }
