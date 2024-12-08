@@ -18,16 +18,11 @@ import {
   MatDialogRef,
   MatDialogTitle,
 } from '@angular/material/dialog';
+import { CATEGORIES } from '../categories';
 
 enum TransactionType {
   Income = 'Income',
   Expense = 'Expense',
-}
-
-export enum Category {
-  Entertainment = 'Entertainment',
-  Groceries = 'Groceries',
-  Salary = 'Salary',
 }
 
 @Component({
@@ -52,7 +47,7 @@ export class AddTransactionComponent {
   private transactionService = inject(TransactionService);
   private dialogRef = inject(MatDialogRef<AddTransactionComponent>);
 
-  categories = [Category.Entertainment, Category.Groceries, Category.Salary];
+  categories = CATEGORIES;
   form = new FormGroup({
     name: new FormControl('', Validators.required),
     amount: new FormControl('', [Validators.required, Validators.min(0.01)]),

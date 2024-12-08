@@ -11,9 +11,9 @@
     <mat-label>Category</mat-label>
     <mat-select name="category" [(ngModel)]="filterForm.value.category" ngModel>
       <mat-option value="all">All</mat-option>
-      <mat-option value="Entertainment">Entertainment</mat-option>
-      <mat-option value="Groseries">Groseries</mat-option>
-      <mat-option value="Salary">Salary</mat-option>
+      @for (category of categories; track category) {
+      <mat-option [value]="category">{{ category }}</mat-option>
+      }
     </mat-select>
   </mat-form-field>
 </form>

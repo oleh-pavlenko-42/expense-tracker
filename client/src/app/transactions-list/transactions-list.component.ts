@@ -13,6 +13,7 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, NgForm } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
+import { CATEGORIES } from '../categories';
 
 @Component({
   selector: 'app-transactions-list',
@@ -36,6 +37,7 @@ export class TransactionsListComponent implements OnInit {
   transactionsDataSource!: MatTableDataSource<Transaction>;
   displayedColumns = ['name', 'amount', 'category', 'date'];
   matSort = viewChild<MatSort>(MatSort);
+  categories = CATEGORIES;
 
   ngOnInit(): void {
     const transactionsSub = this.transactionService
