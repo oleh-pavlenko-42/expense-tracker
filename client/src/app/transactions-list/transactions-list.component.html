@@ -1,3 +1,22 @@
+<form #filterForm="ngForm">
+  <mat-form-field>
+    <mat-label>Type</mat-label>
+    <mat-select name="type" [(ngModel)]="filterForm.value.type" ngModel>
+      <mat-option value="all">All</mat-option>
+      <mat-option value="Income">Income</mat-option>
+      <mat-option value="Expense">Expense</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Category</mat-label>
+    <mat-select name="category" [(ngModel)]="filterForm.value.category" ngModel>
+      <mat-option value="all">All</mat-option>
+      <mat-option value="Entertainment">Entertainment</mat-option>
+      <mat-option value="Groseries">Groseries</mat-option>
+      <mat-option value="Salary">Salary</mat-option>
+    </mat-select>
+  </mat-form-field>
+</form>
 <table mat-table matSort [dataSource]="transactionsDataSource">
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>

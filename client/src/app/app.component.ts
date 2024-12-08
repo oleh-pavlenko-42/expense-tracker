@@ -1,11 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { AddTransactionComponent } from './add-transaction/add-transaction.component';
 import { TransactionsListComponent } from './transactions-list/transactions-list.component';
-import {
-  MatDialog,
-  MatDialogModule,
-  MatDialogRef,
-} from '@angular/material/dialog';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatButton } from '@angular/material/button';
 
 @Component({
